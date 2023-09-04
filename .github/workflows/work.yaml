@@ -1,0 +1,22 @@
+name: Cotinuous Integration
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+      - name: install npm dependencies
+        run: npm install
+      - name: run tests
+        run: npm run test
