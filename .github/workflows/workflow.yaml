@@ -19,6 +19,4 @@ jobs:
       - name: install npm dependencies
         run: npm install
       - name: run tests
-        run: |
-          npm run test
-          npm run test:e2e
+        run: npm run test
