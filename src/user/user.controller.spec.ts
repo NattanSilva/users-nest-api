@@ -6,6 +6,7 @@ import {
 import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { UserOwnerRoleGuard } from '../auth/user-owner-role.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserController } from './user.controller';
@@ -70,6 +71,10 @@ describe('UserController', () => {
         },
         {
           provide: JwtAuthGuard,
+          useValue: jest.fn().mockImplementation(() => true),
+        },
+        {
+          provide: UserOwnerRoleGuard,
           useValue: jest.fn().mockImplementation(() => true),
         },
       ],

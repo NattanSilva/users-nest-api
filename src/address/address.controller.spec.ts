@@ -6,6 +6,7 @@ import {
 import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
 import * as httpMocks from 'node-mocks-http';
+import { AddressOwnerRoleGuard } from '../auth/address-owner-role.guard';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AddressController } from './address.controller';
 import { AddressService } from './address.service';
@@ -65,6 +66,10 @@ describe('AddressController', () => {
         },
         {
           provide: JwtAuthGuard,
+          useValue: jest.fn().mockImplementation(() => true),
+        },
+        {
+          provide: AddressOwnerRoleGuard,
           useValue: jest.fn().mockImplementation(() => true),
         },
       ],

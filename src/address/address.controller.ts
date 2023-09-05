@@ -9,6 +9,7 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
+import { AddressOwnerRoleGuard } from '../auth/address-owner-role.guard';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AddressService } from './address.service';
 import { CreateAddressDto } from './dto/create-address.dto';
@@ -31,19 +32,19 @@ export class AddressController {
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, AddressOwnerRoleGuard)
   findOne(@Param('id') id: string) {
     return this.addressService.findOne(id);
   }
 
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, AddressOwnerRoleGuard)
   update(@Param('id') id: string, @Body() updateAddressDto: UpdateAddressDto) {
     return this.addressService.update(id, updateAddressDto);
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, AddressOwnerRoleGuard)
   remove(@Param('id') id: string) {
     return this.addressService.remove(id);
   }

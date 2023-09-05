@@ -12,5 +12,6 @@ import { AddressEntity } from './entities/address.entity';
     TypeOrmModule.forFeature([AddressEntity]),
     TypeOrmModule.forFeature([UserEntity]),
   ],
+  exports: [AddressService],
 })
 export class AddressModule {}
